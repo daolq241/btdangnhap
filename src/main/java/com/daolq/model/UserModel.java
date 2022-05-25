@@ -15,7 +15,7 @@ public class UserModel {
 	public User getUser(String username, String password) {
 		User user = null;
 		Connection con = MySQLConnection.getConnection();
-		String sql = "select * from users where username = ? and password = ? ";
+		String sql = "select * from user where username = ? and password = ? ";
 		try {
 			PreparedStatement statement = con.prepareStatement(sql);
 			statement.setString(1, username);

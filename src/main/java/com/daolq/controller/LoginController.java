@@ -14,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
@@ -35,11 +36,13 @@ public class LoginController extends HttpServlet {
 		
 		if(user != null) {
 			//Set Session
-			
+			HttpSession session = req.getSession();
+			session.setAttribute("LOGIN_USER", user);
+			session.setMaxInactiveInterval(1000);
 			resp.sendRedirect(req.getContextPath() + "/profile");
 		}else {
 			System.out.println("Đăng nhập thất bại");
 		}
-		req.getRequestDispatcher("login.jsp").forward(req, resp);
+//		req.getRequestDispatcher("login.jsp").forward(req, resp);
 	}
 }
